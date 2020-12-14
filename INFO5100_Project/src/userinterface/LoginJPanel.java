@@ -5,8 +5,16 @@
  */
 package userinterface;
 
+import Business.Platform;
+import Business.UserAccount.UserAccount;
+import Business.Util.InputValidator;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.text.Document;
 
 /**
  *
@@ -15,10 +23,67 @@ import javax.swing.JPanel;
 public class LoginJPanel extends javax.swing.JPanel {
 
     private JPanel mainJFrameContainer;
+    private Platform platform;
     
-    public LoginJPanel(JPanel mainJFrameContainer) {
+    public LoginJPanel(JPanel mainJFrameContainer, Platform platform) {
         initComponents();
         this.mainJFrameContainer = mainJFrameContainer;
+        this.platform = platform;
+        addInputTextFieldListeners();
+    }
+    
+    private void addInputTextFieldListeners() {
+        Document docUser = txtUserName.getDocument();
+        docUser.addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                InputValidator.userNameValidate(lblUserName, txtUserName);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                InputValidator.userNameValidate(lblUserName, txtUserName);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+        Document docPass = txtPassword.getDocument();
+        docPass.addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                char[] passCharArray = txtPassword.getPassword();
+                String password = String.valueOf(passCharArray);
+                if (InputValidator.passwordValidate(password)) {
+                    lblPassword.setForeground(Color.black);
+                    txtPassword.setBorder(new LineBorder(Color.green));
+                }else {
+                    lblPassword.setForeground(Color.red);
+                    txtPassword.setBorder(new LineBorder(Color.red));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                char[] passCharArray = txtPassword.getPassword();
+                String password = String.valueOf(passCharArray);
+                if (InputValidator.passwordValidate(password)) {
+                    lblPassword.setForeground(Color.black);
+                    txtPassword.setBorder(new LineBorder(Color.green));
+                }else {
+                    lblPassword.setForeground(Color.red);
+                    txtPassword.setBorder(new LineBorder(Color.red));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
 
     /**
@@ -30,18 +95,18 @@ public class LoginJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtPassword = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         txtUserName = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
 
-        jLabel3.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
-        jLabel3.setText("User Name");
+        lblUserName.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        lblUserName.setText("User Name");
 
-        jLabel4.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
-        jLabel4.setText("Password");
+        lblPassword.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        lblPassword.setText("Password");
 
         btnRegister.setFont(new java.awt.Font("微软雅黑", 1, 14)); // NOI18N
         btnRegister.setText("Register");
@@ -59,36 +124,42 @@ public class LoginJPanel extends javax.swing.JPanel {
             }
         });
 
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserNameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(240, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
                         .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtUserName)
-                        .addComponent(txtPassword)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                        .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(232, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(184, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addComponent(lblUserName)
                 .addGap(18, 18, 18)
                 .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel4)
+                .addComponent(lblPassword)
                 .addGap(18, 18, 18)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -97,7 +168,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        RegisterJPanel rjp = new RegisterJPanel(mainJFrameContainer);
+        RegisterJPanel rjp = new RegisterJPanel(mainJFrameContainer, platform);
         CardLayout layout = (CardLayout)mainJFrameContainer.getLayout();
         mainJFrameContainer.add("RegisterJPanel",rjp);
         layout.next(mainJFrameContainer);
@@ -105,14 +176,34 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        String userName = txtUserName.getText();
+        char[] passwordCharArray = txtPassword.getPassword();
+        String password = String.valueOf(passwordCharArray);
+        
+        // check if the login account is system admin
+        UserAccount userAccount = platform.getUserAccountDirectory().authenticateUser(userName, password);
+        if(userAccount == null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(!userAccount.isDeleted()) {
+            CardLayout layout = (CardLayout)mainJFrameContainer.getLayout();
+            mainJFrameContainer.add("workArea",userAccount.getRole().createWorkArea(mainJFrameContainer, userAccount, platform));
+            layout.next(mainJFrameContainer);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUserName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

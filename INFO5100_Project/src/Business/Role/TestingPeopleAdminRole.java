@@ -4,12 +4,11 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
-
 import Business.Organization.Organization;
+import Business.Platform;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.TestingPeopleAdminRole.TestingPeopleAdminWorkAreaJPanel;
+import userinterface.TestingPeople.TestingPeopleAdminWorkAreaJPanel;
 
 /**
  *
@@ -18,9 +17,12 @@ import userinterface.TestingPeopleAdminRole.TestingPeopleAdminWorkAreaJPanel;
 public class TestingPeopleAdminRole extends Role{
 
     
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new TestingPeopleAdminWorkAreaJPanel(userProcessContainer, account,business);
+    public TestingPeopleAdminRole() {
+        super(RoleType.TestingPeopleAdmin.getValue());
     }
-    
-    
+
+    @Override
+    public JPanel createWorkArea(JPanel mainJFrameContainer, UserAccount account, Platform platform) {
+        return new TestingPeopleAdminWorkAreaJPanel(mainJFrameContainer, account, platform);
+    }
 }

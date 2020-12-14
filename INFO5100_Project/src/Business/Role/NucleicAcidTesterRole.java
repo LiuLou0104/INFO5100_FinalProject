@@ -4,10 +4,9 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
-
+import Business.Platform;
 import Business.UserAccount.UserAccount;
-import userinterface.NucleicAcidTesterRole.NucleicAcidTesterWorkAreaJPanel;
+import userinterface.TestingSite.NucleicAcidTesterWorkAreaJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -15,10 +14,13 @@ import javax.swing.JPanel;
  * @author raunak
  */
 public class NucleicAcidTesterRole extends Role{
-
-  
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
-        return new NucleicAcidTesterWorkAreaJPanel(userProcessContainer, account, system);
-    }
     
+    public NucleicAcidTesterRole() {
+        super(RoleType.NucleicAcidTester.getValue());
+    }
+
+    @Override
+    public JPanel createWorkArea(JPanel mainJFrameContainer, UserAccount account, Platform platform) {
+        return new NucleicAcidTesterWorkAreaJPanel(mainJFrameContainer, account, platform);
+    }
 }

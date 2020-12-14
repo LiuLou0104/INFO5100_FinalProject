@@ -5,19 +5,23 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
+import Business.Platform;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.TestingSiteAdminRole.TestingSiteAdminWorkAreaJPanel;
+import userinterface.TestingSite.TestingSiteAdminWorkAreaJPanel;
 
 /**
  *
  * @author Administrator
  */
-public class TestingSiteAdminRole {
+public class TestingSiteAdminRole extends Role{
     
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
-        return new TestingSiteAdminWorkAreaJPanel(userProcessContainer, account, system);
+    public TestingSiteAdminRole() {
+        super(RoleType.TestingSiteAdmin.getValue());
     }
-    
+
+    @Override
+    public JPanel createWorkArea(JPanel mainJFrameContainer, UserAccount account, Platform platform) {
+        return new TestingSiteAdminWorkAreaJPanel(mainJFrameContainer, account, platform);
+    }
 }

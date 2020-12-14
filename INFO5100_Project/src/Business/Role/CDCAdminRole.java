@@ -8,20 +8,20 @@ package Business.Role;
 import Business.Platform;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.TestingSite.TestingSiteDataHandlerWorkAreaJPanel;
+import userinterface.CDC.CDCAdminWorkAreaJPanel;
 
 /**
  *
  * @author Administrator
  */
-public class TestingSiteDataHandlerRole extends Role{
-    
-    public TestingSiteDataHandlerRole() {
-        super(RoleType.TestingSiteDataHandler.getValue());
+public class CDCAdminRole extends Role{
+
+    public CDCAdminRole() {
+        super(RoleType.CDCAdmin.getValue());
     }
 
     @Override
     public JPanel createWorkArea(JPanel mainJFrameContainer, UserAccount account, Platform platform) {
-        return new TestingSiteDataHandlerWorkAreaJPanel(mainJFrameContainer, account, platform);
+        return new CDCAdminWorkAreaJPanel(mainJFrameContainer, account, platform);
     }
 }

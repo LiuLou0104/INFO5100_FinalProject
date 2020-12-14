@@ -4,6 +4,8 @@
  */
 package Business.Employee;
 
+import Business.City.City;
+import Business.Employee.Employee.SexType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +29,8 @@ public class EmployeeDirectory {
         employeeList.add(employee);
     }
     
-    public Employee createEmployee(String name){
-        Employee employee = new Employee();
+    public Employee createAndAddEmployee(String name, String age, SexType sex, String email, City city){
+        Employee employee = new Employee(name, age, sex, email, city);
         employee.setName(name);
         employeeList.add(employee);
         return employee;

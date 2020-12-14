@@ -7,7 +7,7 @@ package Business.Organization;
 
 import Business.CustomerOrganization;
 import Business.Organization.Organization;
-import Business.Organization.Organization.Type;
+import Business.Organization.Organization.OrgType;
 import java.util.ArrayList;
 
 /**
@@ -28,53 +28,53 @@ public class OrganizationDirectory {
     
     public Organization getTestingPeopleOrg() {
         for (Organization o : organizationList) {
-            if (o.getName().equals(Type.TestingPeople.getValue())) {
+            if (o.getName().equals(OrgType.TestingPeople.getValue())) {
                 return o;
             }
         }
         return null;
     }
     
-    public Organization createOrganization(Type type){
+    public Organization createOrganization(OrgType type){
         Organization organization = null;
-        if (type.getValue().equals(Type.TestingPeople.getValue())){
-            organization = new TestingPeopleOrganization(Type.TestingPeople.getValue());
+        if (type.getValue().equals(OrgType.TestingPeople.getValue())){
+            organization = new TestingPeopleOrganization(OrgType.TestingPeople.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.ManageTestingPeople.getValue())){
-            organization = new ManageTestingPeopleOrganization(Type.ManageTestingPeople.getValue());
+        else if (type.getValue().equals(OrgType.ManageTestingPeople.getValue())){
+            organization = new ManageTestingPeopleOrganization(OrgType.ManageTestingPeople.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.SampleCollection.getValue())){
-            organization = new SampleCollectionOrganization(Type.SampleCollection.getValue());
+        else if (type.getValue().equals(OrgType.SampleCollection.getValue())){
+            organization = new SampleCollectionOrganization(OrgType.SampleCollection.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.NucleicAcidTest.getValue())){
-            organization = new NucleicAcidTestOrganization(Type.NucleicAcidTest.getValue());
+        else if (type.getValue().equals(OrgType.NucleicAcidTest.getValue())){
+            organization = new NucleicAcidTestOrganization(OrgType.NucleicAcidTest.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.TestingSiteDataHandling.getValue())){
-            organization = new TestingSiteDataHandlingOrganization(Type.TestingSiteDataHandling.getValue());
+        else if (type.getValue().equals(OrgType.TestingSiteDataHandling.getValue())){
+            organization = new TestingSiteDataHandlingOrganization(OrgType.TestingSiteDataHandling.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.ManageTestingSite.getValue())){
-            organization = new ManageTestingSiteOrganization(Type.ManageTestingSite.getValue());
+        else if (type.getValue().equals(OrgType.ManageTestingSite.getValue())){
+            organization = new ManageTestingSiteOrganization(OrgType.ManageTestingSite.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.CDCDataHandling.getValue())){
-            organization = new CDCDataHandlingOrganization(Type.CDCDataHandling.getValue());
+        else if (type.getValue().equals(OrgType.CDCDataHandling.getValue())){
+            organization = new CDCDataHandlingOrganization(OrgType.CDCDataHandling.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.CDCInfoDistribution.getValue())){
-            organization = new CDCInfoDistributionOrganization(Type.CDCInfoDistribution.getValue());
+        else if (type.getValue().equals(OrgType.CDCInfoDistribution.getValue())){
+            organization = new CDCInfoDistributionOrganization(OrgType.CDCInfoDistribution.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.CDCHumanResource.getValue())){
-            organization = new CDCHumanResourceOrganization(Type.CDCHumanResource.getValue());
+        else if (type.getValue().equals(OrgType.CDCHumanResource.getValue())){
+            organization = new CDCHumanResourceOrganization(OrgType.CDCHumanResource.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.Simulation.getValue())){
-            organization = new SimulationOrganization(Type.Simulation.getValue());
+        else if (type.getValue().equals(OrgType.Simulation.getValue())){
+            organization = new SimulationOrganization(OrgType.Simulation.getValue());
             organizationList.add(organization);
         }
         

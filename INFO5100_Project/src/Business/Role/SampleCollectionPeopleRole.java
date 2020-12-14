@@ -5,10 +5,10 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
+import Business.Platform;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.SampleCollectionPeopleRole.SampleCollectionPeopleWorkAreaJPanel;
+import userinterface.TestingSite.SampleCollectionPeopleWorkAreaJPanel;
 
 /**
  *
@@ -16,9 +16,12 @@ import userinterface.SampleCollectionPeopleRole.SampleCollectionPeopleWorkAreaJP
  */
 public class SampleCollectionPeopleRole extends Role {
 
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new SampleCollectionPeopleWorkAreaJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
+    public SampleCollectionPeopleRole() {
+        super(RoleType.SampleCollectionPeople.getValue());
     }
-    
+
+    @Override
+    public JPanel createWorkArea(JPanel mainJFrameContainer, UserAccount account, Platform platform) {
+        return new SampleCollectionPeopleWorkAreaJPanel(mainJFrameContainer, account, platform);
+    }
 }
