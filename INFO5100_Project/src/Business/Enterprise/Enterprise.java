@@ -25,14 +25,14 @@ public abstract class Enterprise {
     private int enterpriseID;
     private static int counter=0;
     
-    public enum Type{
+    public enum EnterpriseType{
         TestingPeople("TestingPeopleEnterprise"),
         TestingSite("TestingSiteEnterprise"),
         CDC("CDCEnterprise"),
         PandemicSimulation("PandemicSimulationEnterprise");
         
         private String value;
-        private Type(String value) {
+        private EnterpriseType(String value) {
             this.value = value;
         }
         public String getValue() {

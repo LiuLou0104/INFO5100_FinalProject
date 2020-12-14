@@ -5,7 +5,7 @@ package Business.Enterprise;
  * and open the template in the editor.
  */
 
-import Business.Enterprise.Enterprise.Type;
+import Business.Enterprise.Enterprise.EnterpriseType;
 import java.util.ArrayList;
 
 /**
@@ -24,22 +24,22 @@ public class EnterpriseDirectory {
         return enterpriseList;
     }
     
-    public Enterprise createEnterprise(Type type){
+    public Enterprise createEnterprise(EnterpriseType type){
         Enterprise enterprise = null;
-        if (type.getValue().equals(Type.TestingPeople.getValue())){
-            enterprise = new TestingPeopleEnterprise(Type.TestingPeople.getValue());
+        if (type.getValue().equals(EnterpriseType.TestingPeople.getValue())){
+            enterprise = new TestingPeopleEnterprise(EnterpriseType.TestingPeople.getValue());
             enterpriseList.add(enterprise);
         }
-        else if (type.getValue().equals(Type.TestingSite.getValue())){
-            enterprise = new TestingSiteEnterprise(Type.TestingSite.getValue());
+        else if (type.getValue().equals(EnterpriseType.TestingSite.getValue())){
+            enterprise = new TestingSiteEnterprise(EnterpriseType.TestingSite.getValue());
             enterpriseList.add(enterprise);
         }
-        else if (type.getValue().equals(Type.CDC.getValue())){
-            enterprise = new CDCEnterprise(Type.CDC.getValue());
+        else if (type.getValue().equals(EnterpriseType.CDC.getValue())){
+            enterprise = new CDCEnterprise(EnterpriseType.CDC.getValue());
             enterpriseList.add(enterprise);
         }
-        else if (type.getValue().equals(Type.PandemicSimulation.getValue())){
-            enterprise = new PandemicSimulationEnterprise(Type.PandemicSimulation.getValue());
+        else if (type.getValue().equals(EnterpriseType.PandemicSimulation.getValue())){
+            enterprise = new PandemicSimulationEnterprise(EnterpriseType.PandemicSimulation.getValue());
             enterpriseList.add(enterprise);
         }
         

@@ -23,7 +23,7 @@ public abstract class Organization {
     private int organizationID;
     private static int counter=0;
     
-    public enum Type{
+    public enum OrgType{
         TestingPeople("TestingPeopleUsingOrganization"),
         ManageTestingPeople("ManageTestingPeopleOrganization"),
         SampleCollection("SampleCollectionOrganization"),
@@ -37,7 +37,7 @@ public abstract class Organization {
         
         
         private String value;
-        private Type(String value) {
+        private OrgType(String value) {
             this.value = value;
         }
         public String getValue() {

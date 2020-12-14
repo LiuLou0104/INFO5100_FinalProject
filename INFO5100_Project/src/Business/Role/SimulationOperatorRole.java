@@ -5,19 +5,23 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
+import Business.Platform;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.SimulationOperatorRole.SimulationOperatorWorkAreaJPanel;
+import userinterface.Simulation.SimulationOperatorWorkAreaJPanel;
 
 /**
  *
  * @author Administrator
  */
-public class SimulationOperatorRole {
+public class SimulationOperatorRole extends Role{
     
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
-        return new SimulationOperatorWorkAreaJPanel(userProcessContainer, account, system);
+    public SimulationOperatorRole() {
+        super(RoleType.SimulationOperator.getValue());
     }
-    
+
+    @Override
+    public JPanel createWorkArea(JPanel mainJFrameContainer, UserAccount account, Platform platform) {
+        return new SimulationOperatorWorkAreaJPanel(mainJFrameContainer, account, platform);
+    }
 }

@@ -4,9 +4,8 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
-
 import Business.Organization.Organization;
+import Business.Platform;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -16,8 +15,14 @@ import javax.swing.JPanel;
  */
 public abstract class Role {
     
+    private String name;
+
+    public Role(String name) {
+        this.name = name;
+    }
+    
     public enum RoleType{
-        RegisteredTestingPeople("RegisteredTestingPeople"),
+        RegisteredTestingPeople("TestingPeople"),
         TestingPeopleAdmin("TestingPeopleAdmin"),
         SampleCollectionPeople("SampleCollectionPeople"),
         NucleicAcidTester("NucleicAcidTester"),
@@ -25,7 +30,7 @@ public abstract class Role {
         TestingSiteAdmin("TestingSiteAdmin"),
         CDCDataHandler("CDCDataHandler"),
         CDCInfoDistributor("CDCInfoDistributor"),
-        CDCHR("CDCHR"),
+        CDCAdmin("CDCAdmin"),
         SimulationOperator("SimulationOperator");
         
         private String value;
@@ -45,11 +50,11 @@ public abstract class Role {
     
     public abstract JPanel createWorkArea(JPanel userProcessContainer, 
             UserAccount account,  
-            EcoSystem business);
+            Platform platform);
 
     @Override
     public String toString() {
-        return this.getClass().getName();
+        return name;
     }
     
     

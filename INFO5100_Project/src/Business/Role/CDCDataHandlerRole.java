@@ -5,19 +5,24 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
+import Business.Platform;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.CDCDataHandlerRole.CDCDataHandlerWorkAreaJPanel;
+import userinterface.CDC.CDCDataHandlerWorkAreaJPanel;
 
 /**
  *
  * @author Administrator
  */
-public class CDCDataHandlerRole {
+public class CDCDataHandlerRole extends Role{
     
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
-        return new CDCDataHandlerWorkAreaJPanel(userProcessContainer, account, system);
+    public CDCDataHandlerRole() {
+        super(RoleType.CDCDataHandler.getValue());
+    }
+
+    @Override
+    public JPanel createWorkArea(JPanel mainJFrameContainer, UserAccount account, Platform platform) {
+        return new CDCDataHandlerWorkAreaJPanel(mainJFrameContainer, account, platform);
     }
     
 }

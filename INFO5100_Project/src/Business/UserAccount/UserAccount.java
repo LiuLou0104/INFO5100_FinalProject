@@ -20,9 +20,21 @@ public class UserAccount {
     private Employee employee;
     private Role role;
     private WorkQueue workQueue;
+    boolean deleted  = false;
 
     public UserAccount() {
         workQueue = new WorkQueue();
+    }
+
+    public UserAccount(String username, String password, Employee employee, Role role) {
+        this.username = username;
+        this.password = password;
+        this.employee = employee;
+        this.role = role;
+    }
+    
+    public void deleteThisAccount() {
+        setDeleted(true);
     }
     
     @Override
@@ -82,10 +94,21 @@ public class UserAccount {
         return workQueue;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    private void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     
     
     @Override
     public String toString() {
+        if (this.isDeleted()) {
+            return "</deleted>" + username;
+        }
         return username;
     }
     

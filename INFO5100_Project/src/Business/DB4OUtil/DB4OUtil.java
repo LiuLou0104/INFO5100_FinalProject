@@ -1,7 +1,7 @@
 package Business.DB4OUtil;
 
-import Business.ConfigureASystem;
-import Business.EcoSystem;
+import Business.ConfigureAPlatform;
+import Business.Platform;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -43,7 +43,7 @@ public class DB4OUtil {
             config.common().updateDepth(Integer.MAX_VALUE);
 
             //Register your top most Class here
-            config.common().objectClass(EcoSystem.class).cascadeOnUpdate(true); // Change to the object you want to save
+            config.common().objectClass(Platform.class).cascadeOnUpdate(true); // Change to the object you want to save
 
             ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
             return db;
@@ -53,36 +53,36 @@ public class DB4OUtil {
         return null;
     }
 
-    public synchronized void storeSystem(EcoSystem system) {
+    public synchronized void storeSystem(Platform platform) {
         ObjectContainer conn = createConnection();
         
-        conn.store(system);
+        conn.store(platform);
         conn.commit();
         conn.close();
     }
     
-    public EcoSystem retrieveSystem(){
+    public Platform retrieveSystem(){
         ObjectContainer conn = createConnection();
-        ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class);
+        ObjectSet<Platform> platforms = conn.query(Platform.class);
         
         // delete existing EcoSystem
 //        for (EcoSystem s : systems) {
 //            conn.delete(s);
 //        }
-//        EcoSystem system = ConfigureASystem.configure();
+//        EcoSystem system = ConfigureAPlatform.configure();
         
-        EcoSystem system;
-        if (systems.size() == 0){
-            System.out.println("No EcoSystem stored before, configuring a new one...");
-            system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
+        Platform platform;
+        if (platforms.size() == 0){
+            System.out.println("No Platform stored before, configuring a new one...");
+            platform = ConfigureAPlatform.configure();  // If there's no System in the record, create a new one
         }
         else{
             System.out.println("Loading existing EcoSystem...");
-            system = systems.get(systems.size() - 1);
+            platform = platforms.get(platforms.size() - 1);
         }
 
         conn.close();
-        return system;
+        return platform;
     }
    
 }

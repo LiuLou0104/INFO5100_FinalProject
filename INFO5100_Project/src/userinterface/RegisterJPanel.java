@@ -5,8 +5,23 @@
  */
 package userinterface;
 
+import Business.City.City;
+import Business.Employee.Employee;
+import Business.Employee.Employee.SexType;
+import Business.Platform;
+import Business.Role.RegisteredTestingPeopleRole;
+import Business.Role.Role;
+import Business.UserAccount.UserAccount;
+import Business.Util.InputValidator;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.text.Document;
 
 /**
  *
@@ -15,10 +30,131 @@ import javax.swing.JPanel;
 public class RegisterJPanel extends javax.swing.JPanel {
 
     private JPanel mainJFrameContainer;
+    private Platform platform;
     
-    public RegisterJPanel(JPanel mainJFrameContainer) {
+    public RegisterJPanel(JPanel mainJFrameContainer, Platform platform) {
         initComponents();
         this.mainJFrameContainer = mainJFrameContainer;
+        this.platform = platform;
+        addInputTextFieldListeners();
+        populateRoleCbx();
+        populateCityCbx();
+        initSexButtonGroup();
+    }
+    
+    private void initSexButtonGroup() {
+        bgSex = new ButtonGroup();
+
+        bgSex.add(rbtnMale);
+        bgSex.add(rbtnFemale);
+    }
+    
+    private void populateRoleCbx() {
+        DefaultComboBoxModel<Object> dcbm = new DefaultComboBoxModel<>();
+        dcbm.addElement(new RegisteredTestingPeopleRole());
+        cbxRegisteredRole.setModel(dcbm);
+        cbxRegisteredRole.setEnabled(false);
+    }
+    
+    private void populateCityCbx() {
+        DefaultComboBoxModel<Object> dcbm = new DefaultComboBoxModel<>();
+        for (City city : platform.getCityDirectory().getCityList()) {
+            dcbm.addElement(city);
+        }
+        cbxCity.setModel(dcbm);
+        cbxCity.setSelectedIndex(-1);
+    }
+    
+    private void addInputTextFieldListeners() {
+        Document docUser = txtUserName.getDocument();
+        docUser.addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                InputValidator.userNameValidate(lblUserName, txtUserName);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                InputValidator.userNameValidate(lblUserName, txtUserName);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+        Document docPass = txtPassword.getDocument();
+        docPass.addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                InputValidator.passwordValidate(lblPassword, txtPassword);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                InputValidator.passwordValidate(lblPassword, txtPassword);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+        Document docEmail = txtEmail.getDocument();
+        docEmail.addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                InputValidator.emailValidate(lblEmail, txtEmail);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                InputValidator.emailValidate(lblEmail, txtEmail);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+        Document docName = txtName.getDocument();
+        docName.addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                InputValidator.userNameValidate(lblName, txtName);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                InputValidator.userNameValidate(lblName, txtName);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+        Document docAge = txtAge.getDocument();
+        docAge.addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                InputValidator.ageValidate(lblAge, txtAge);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                InputValidator.ageValidate(lblAge, txtAge);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
 
     /**
@@ -31,24 +167,24 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JPasswordField();
+        lblAge = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         rbtnFemale = new javax.swing.JRadioButton();
-        jLabel5 = new javax.swing.JLabel();
-        txtAge = new javax.swing.JPasswordField();
+        lblEmail = new javax.swing.JLabel();
         rbtnMale = new javax.swing.JRadioButton();
-        txtEmail = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cbxRole = new javax.swing.JComboBox<>();
+        cbxRegisteredRole = new javax.swing.JComboBox<>();
         cbxCity = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
+        txtAge = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
 
         btnBack.setFont(new java.awt.Font("微软雅黑", 1, 14)); // NOI18N
         btnBack.setText("<< Back to Login");
@@ -58,8 +194,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
-        jLabel4.setText("Password");
+        lblPassword.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        lblPassword.setText("Password");
 
         jLabel7.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
         jLabel7.setText("Sex");
@@ -73,11 +209,17 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
-        jLabel8.setText("Name");
+        lblName.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        lblName.setText("Name");
 
-        jLabel9.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
-        jLabel9.setText("Age");
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserNameActionPerformed(evt);
+            }
+        });
+
+        lblAge.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        lblAge.setText("Age");
 
         rbtnFemale.setFont(new java.awt.Font("微软雅黑", 2, 12)); // NOI18N
         rbtnFemale.setText("Female");
@@ -87,8 +229,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
-        jLabel5.setText("Email");
+        lblEmail.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        lblEmail.setText("Email");
 
         rbtnMale.setFont(new java.awt.Font("微软雅黑", 2, 12)); // NOI18N
         rbtnMale.setText("Male");
@@ -104,45 +246,59 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
         jLabel6.setText("Register Role");
 
-        cbxRole.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
-        cbxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxRegisteredRole.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
+        cbxRegisteredRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cbxCity.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
         cbxCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel3.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
-        jLabel3.setText("User Name");
+        lblUserName.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        lblUserName.setText("User Name");
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addContainerGap(71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEmail)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtUserName)
-                    .addComponent(txtPassword)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxRegisteredRole, 0, 221, Short.MAX_VALUE)
+                    .addComponent(txtPassword)
+                    .addComponent(txtEmail))
                 .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(rbtnFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(rbtnMale, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rbtnFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxCity, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtName)
-                                .addComponent(txtAge)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rbtnMale, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAge))))
                     .addComponent(btnRegister, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
@@ -150,45 +306,46 @@ public class RegisterJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblUserName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
+                        .addComponent(lblPassword)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel5)
+                        .addComponent(lblEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbtnMale)
-                            .addComponent(rbtnFemale)))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(lblName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
-                        .addComponent(jLabel9)
+                        .addComponent(lblAge)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbtnMale)
+                            .addComponent(rbtnFemale))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxRegisteredRole, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxCity, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -200,6 +357,65 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
+        String username = txtUserName.getText();
+        String password = txtPassword.getText();
+        String email = txtEmail.getText();
+        String name = txtName.getText();
+        String age = txtAge.getText();
+        SexType sexType = rbtnMale.isSelected() ? SexType.Male : SexType.Female;
+        City city = (City) cbxCity.getSelectedItem();
+        Role role = (Role) cbxRegisteredRole.getSelectedItem();
+        
+        if(username.isEmpty() || username.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter username!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(password.isEmpty() || password.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter password!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(email.isEmpty() || email.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter email!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(name.isEmpty() || name.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter name!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(age.isEmpty() || age.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter age!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(!rbtnFemale.isSelected() && !rbtnMale.isSelected()){
+            JOptionPane.showMessageDialog(null, "Please select sex!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(cbxCity.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Please select city!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (!platform.checkIfUserAccountIsUnique(username)) {
+            JOptionPane.showMessageDialog(null, "Duplicate username, please enter another one!!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Employee e = new Employee(name, age, sexType, email, city);
+        platform.getEmployeeDirectory().createAndAddEmployee(name, age, sexType, email, city);
+        UserAccount ua = platform.getUserAccountDirectory().createAndAddUserAccount(username, password, e, role);
+        
+        JOptionPane.showMessageDialog(null, "Register successfully!!!");
+        mainJFrameContainer.remove(this);
+        CardLayout layout = (CardLayout) mainJFrameContainer.getLayout();
+        layout.previous(mainJFrameContainer);
+//        txtUserName.setText("");
+//        txtPassword.setText("");
+//        txtEmail.setText("");
+//        txtName.setText("");
+//        txtAge.setText("");
+//        rbtnFemale.setSelected(false);
+//        rbtnMale.setSelected(false);
+//        cbxCity.setSelectedIndex(-1);
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void rbtnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFemaleActionPerformed
@@ -210,26 +426,39 @@ public class RegisterJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnMaleActionPerformed
 
+    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserNameActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JComboBox<String> cbxCity;
-    private javax.swing.JComboBox<String> cbxRole;
+    private javax.swing.JComboBox<Object> cbxCity;
+    private javax.swing.JComboBox<Object> cbxRegisteredRole;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblAge;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUserName;
     private javax.swing.JRadioButton rbtnFemale;
     private javax.swing.JRadioButton rbtnMale;
-    private javax.swing.JPasswordField txtAge;
-    private javax.swing.JPasswordField txtEmail;
+    private javax.swing.JTextField txtAge;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
+    private javax.swing.ButtonGroup bgSex; 
 }

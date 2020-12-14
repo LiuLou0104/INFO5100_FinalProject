@@ -32,12 +32,8 @@ public class UserAccountDirectory {
         return null;
     }
     
-    public UserAccount createAddUserAccount(String username, String password, Employee employee, Role role){
-        UserAccount userAccount = new UserAccount();
-        userAccount.setUsername(username);
-        userAccount.setPassword(password);
-        userAccount.setEmployee(employee);
-        userAccount.setRole(role);
+    public UserAccount createAndAddUserAccount(String username, String password, Employee employee, Role role){
+        UserAccount userAccount = new UserAccount(username, password, employee, role);
         userAccountList.add(userAccount);
         return userAccount;
     }
