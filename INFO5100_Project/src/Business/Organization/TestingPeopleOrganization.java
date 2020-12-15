@@ -19,8 +19,10 @@ class TestingPeopleOrganization extends Organization {
     }
 
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Role.RoleType> getSupportedRoleList() {
+        ArrayList<Role.RoleType> list = new ArrayList<>();
+        list.add(Role.RoleType.RegisteredTestingPeople);
+        return list;
     }
     
 }

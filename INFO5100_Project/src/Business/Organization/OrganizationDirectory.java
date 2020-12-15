@@ -5,9 +5,11 @@ package Business.Organization;
  * and open the template in the editor.
  */
 
-import Business.CustomerOrganization;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.Organization.OrgType;
+import Business.Role.Role;
+import Business.Role.Role.RoleType;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,18 @@ public class OrganizationDirectory {
 
     public OrganizationDirectory() {
         organizationList = new ArrayList();
+    }
+    
+    public Organization getOrganizationByRole(Role role) {
+        for (Organization org : organizationList) {
+            ArrayList<RoleType> roleList = org.getSupportedRoleList();
+            for (RoleType type : roleList) {
+                if (type.getValue().equals(role.getName())) {
+                    return org;
+                }
+            }
+        }
+        return null;
     }
 
     public ArrayList<Organization> getOrganizationList() {
@@ -35,14 +49,14 @@ public class OrganizationDirectory {
         return null;
     }
     
-    public Organization createOrganization(OrgType type){
+    public Organization createAndAddOrganization(OrgType type){
         Organization organization = null;
         if (type.getValue().equals(OrgType.TestingPeople.getValue())){
             organization = new TestingPeopleOrganization(OrgType.TestingPeople.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(OrgType.ManageTestingPeople.getValue())){
-            organization = new ManageTestingPeopleOrganization(OrgType.ManageTestingPeople.getValue());
+        else if (type.getValue().equals(OrgType.TestingPeopleManager.getValue())){
+            organization = new TestingPeopleManagerOrganization(OrgType.TestingPeopleManager.getValue());
             organizationList.add(organization);
         }
         else if (type.getValue().equals(OrgType.SampleCollection.getValue())){
@@ -57,8 +71,8 @@ public class OrganizationDirectory {
             organization = new TestingSiteDataHandlingOrganization(OrgType.TestingSiteDataHandling.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(OrgType.ManageTestingSite.getValue())){
-            organization = new ManageTestingSiteOrganization(OrgType.ManageTestingSite.getValue());
+        else if (type.getValue().equals(OrgType.TestingSiteManager.getValue())){
+            organization = new TestingSiteManagerOrganization(OrgType.TestingSiteManager.getValue());
             organizationList.add(organization);
         }
         else if (type.getValue().equals(OrgType.CDCDataHandling.getValue())){
@@ -69,8 +83,8 @@ public class OrganizationDirectory {
             organization = new CDCInfoDistributionOrganization(OrgType.CDCInfoDistribution.getValue());
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(OrgType.CDCHumanResource.getValue())){
-            organization = new CDCHumanResourceOrganization(OrgType.CDCHumanResource.getValue());
+        else if (type.getValue().equals(OrgType.CDCManager.getValue())){
+            organization = new CDCManagerOrganization(OrgType.CDCManager.getValue());
             organizationList.add(organization);
         }
         else if (type.getValue().equals(OrgType.Simulation.getValue())){

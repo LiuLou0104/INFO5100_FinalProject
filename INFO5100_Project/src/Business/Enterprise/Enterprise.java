@@ -7,10 +7,11 @@ package Business.Enterprise;
 
 import Business.Organization.OrganizationDirectory;
 import Business.Employee.EmployeeDirectory;
-import Business.Role.Role;
+import Business.Role.Role.RoleType;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -50,7 +51,7 @@ public abstract class Enterprise {
         ++counter;
     }
     
-    public abstract ArrayList<Role> getSupportedRole();
+    public abstract ArrayList<RoleType> getSupportedRoleList();
     
     @Override
     public String toString() {

@@ -8,8 +8,10 @@ package userinterface;
 import Business.Platform;
 import Business.UserAccount.UserAccount;
 import Business.Util.InputValidator;
+import Business.Util.StretchIcon;
 import java.awt.CardLayout;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -29,7 +31,15 @@ public class LoginJPanel extends javax.swing.JPanel {
         initComponents();
         this.mainJFrameContainer = mainJFrameContainer;
         this.platform = platform;
+        displayLogo();
         addInputTextFieldListeners();
+    }
+    
+    private void displayLogo() {
+        String rootDir = System.getProperty("user.dir");
+        String iconPath = rootDir + "\\src\\Resources\\logo.png";
+        ImageIcon imageIcon = new StretchIcon(iconPath);
+        lblLogo.setIcon(imageIcon);
     }
     
     private void addInputTextFieldListeners() {
@@ -101,6 +111,10 @@ public class LoginJPanel extends javax.swing.JPanel {
         btnLogin = new javax.swing.JButton();
         txtUserName = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         lblUserName.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
         lblUserName.setText("User Name");
@@ -108,7 +122,9 @@ public class LoginJPanel extends javax.swing.JPanel {
         lblPassword.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
         lblPassword.setText("Password");
 
+        btnRegister.setBackground(new java.awt.Color(65, 105, 225));
         btnRegister.setFont(new java.awt.Font("微软雅黑", 1, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +132,9 @@ public class LoginJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnLogin.setBackground(new java.awt.Color(65, 105, 225));
         btnLogin.setFont(new java.awt.Font("微软雅黑", 1, 14)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,12 +148,21 @@ public class LoginJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("微软雅黑", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel1.setText("COVID-19 TESTING AND WARNING PLATFORM");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(240, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,14 +171,22 @@ public class LoginJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                        .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                        .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(158, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(184, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addGap(38, 38, 38)
                 .addComponent(lblUserName)
                 .addGap(18, 18, 18)
                 .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +198,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,12 +211,27 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String userName = txtUserName.getText();
+        String username = txtUserName.getText();
         char[] passwordCharArray = txtPassword.getPassword();
         String password = String.valueOf(passwordCharArray);
         
+        if (!InputValidator.userNameValidate(username)) {
+            JOptionPane.showMessageDialog(null, "Invalid input!\nUsername consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.\n" +
+                "Username allowed of the dot (.), underscore (_), and hyphen (-).\n" +
+                "The dot (.), underscore (_), or hyphen (-) must not be the first or last character.\n" +
+                "The dot (.), underscore (_), or hyphen (-) does not appear consecutively, e.g., java..regex\n" +
+                "The number of characters must be between 5 to 20.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!InputValidator.passwordValidate(password)) {
+            JOptionPane.showMessageDialog(null, "Invalid input!\nPassword consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.\n"
+                    + "At least one character of [$*#&@.].\n"
+                    + "At least six characters long.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         // check if the login account is system admin
-        UserAccount userAccount = platform.getUserAccountDirectory().authenticateUser(userName, password);
+        UserAccount userAccount = platform.getUserAccountDirectory().authenticateUser(username, password);
         if(userAccount == null){
             JOptionPane.showMessageDialog(null, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -202,6 +252,8 @@ public class LoginJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JPasswordField txtPassword;

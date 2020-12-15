@@ -33,7 +33,7 @@ public class Platform {
         userAccountDirectory = new UserAccountDirectory();
         cityDirectory = new CityDirectory();
         allActivitiesWorkQueue = new WorkQueue();
-        platformLogger = Logger.getLogger("Covid-19 Testing and Alert Platform");
+//        platformLogger = Logger.getLogger("Covid-19 Testing and Alert Platform");//this line will called storeSystem() error
     }
     
     public static Platform getInstance(){

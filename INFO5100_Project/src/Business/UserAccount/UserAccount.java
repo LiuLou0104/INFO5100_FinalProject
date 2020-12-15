@@ -21,16 +21,17 @@ public class UserAccount {
     private Role role;
     private WorkQueue workQueue;
     boolean deleted  = false;
-
-    public UserAccount() {
-        workQueue = new WorkQueue();
-    }
+    String iconPath;
 
     public UserAccount(String username, String password, Employee employee, Role role) {
         this.username = username;
         this.password = password;
         this.employee = employee;
         this.role = role;
+        this.workQueue = new WorkQueue();
+        String rootDir = System.getProperty("user.dir");
+        iconPath = rootDir + "\\src\\Resources\\DefaultUserIcon.png";
+//        iconPath = "src/Resources/DefaultUserIcon.png";
     }
     
     public void deleteThisAccount() {
@@ -102,6 +103,14 @@ public class UserAccount {
         this.deleted = deleted;
     }
 
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
+    
     
     
     @Override

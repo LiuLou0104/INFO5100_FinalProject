@@ -20,12 +20,18 @@ public abstract class WorkRequest {
     private Date requestDate;
     private Date resolveDate;
     
-    public WorkRequest(){
-        requestDate = new Date();
+//    public WorkRequest(){
+//        requestDate = new Date();
+//    }
+    
+    // this constructor is used for TestRequest;
+    public WorkRequest() {
     }
 
-    public WorkRequest(UserAccount sender) {
+    // this constructor is used for MessageRequest
+    public WorkRequest(UserAccount sender, UserAccount receiver) {
         this.sender = sender;
+        this.receiver = receiver;
         requestDate = new Date();
     }
 

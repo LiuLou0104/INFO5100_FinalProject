@@ -6,6 +6,7 @@ package Business.Organization;
 
 import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
+import Business.Role.Role.RoleType;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
@@ -24,15 +25,15 @@ public abstract class Organization {
     private static int counter=0;
     
     public enum OrgType{
-        TestingPeople("TestingPeopleUsingOrganization"),
-        ManageTestingPeople("ManageTestingPeopleOrganization"),
+        TestingPeople("TestingPeopleOrganization"),
+        TestingPeopleManager("TestingPeopleManagerOrganization"),
         SampleCollection("SampleCollectionOrganization"),
         NucleicAcidTest("NucleicAcidTestOrganization"),
         TestingSiteDataHandling("TestingSiteDataHandlingOrganization"),
-        ManageTestingSite("ManageTestingSiteOrganization"),
+        TestingSiteManager("TestingSiteManagerOrganization"),
         CDCDataHandling("CDCDataHandlingOrganization"),
         CDCInfoDistribution("CDCInfoDistributionOrganization"),
-        CDCHumanResource("CDCHumanResourceOrganization"),
+        CDCManager("CDCManagerOrganization"),
         Simulation("SimulationOrganization");
         
         
@@ -54,7 +55,7 @@ public abstract class Organization {
         ++counter;
     }
     
-    public abstract ArrayList<Role> getSupportedRole();
+    public abstract ArrayList<RoleType> getSupportedRoleList();
     
     public UserAccountDirectory getUserAccountDirectory() {
         return userAccountDirectory;

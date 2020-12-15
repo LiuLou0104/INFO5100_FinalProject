@@ -6,6 +6,7 @@
 package Business.Enterprise;
 
 import Business.Role.Role;
+import Business.Role.Role.RoleType;
 import java.util.ArrayList;
 
 /**
@@ -19,8 +20,12 @@ class CDCEnterprise extends Enterprise {
     }
 
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<RoleType> getSupportedRoleList() {
+        ArrayList<RoleType> list = new ArrayList<>();
+        list.add(RoleType.CDCAdmin);
+        list.add(RoleType.CDCDataHandler);
+        list.add(RoleType.CDCInfoDistributor);
+        return list;
     }
     
 }

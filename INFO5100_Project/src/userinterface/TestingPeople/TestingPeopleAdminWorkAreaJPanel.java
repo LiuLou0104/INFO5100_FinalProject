@@ -9,7 +9,10 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Platform;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import userinterface.MessageJPanel;
+import userinterface.SettingsJPanel;
 
 /**
  *
@@ -30,7 +33,10 @@ public class TestingPeopleAdminWorkAreaJPanel extends javax.swing.JPanel {
         initLeftUserBar();
     }
     
-    private void initLeftUserBar() {
+    public void initLeftUserBar() {
+        String imagePath = loginAccount.getIconPath();
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+        userIcon.setIcon(imageIcon);
         lblUserName.setText(loginAccount.getUsername());
         lblVersion.setText(platform.getVersion());
     }
@@ -59,7 +65,8 @@ public class TestingPeopleAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        userIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/DefaultUserIcon.png"))); // NOI18N
+        leftBar.setBackground(new java.awt.Color(255, 255, 255));
+
         userIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblUserName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -89,6 +96,11 @@ public class TestingPeopleAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnSettings.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnSettings.setText("Settings");
         btnSettings.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettingsActionPerformed(evt);
+            }
+        });
 
         btnAllTesting.setBackground(new java.awt.Color(255, 209, 111));
         btnAllTesting.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -145,8 +157,8 @@ public class TestingPeopleAdminWorkAreaJPanel extends javax.swing.JPanel {
             leftBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftBarLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(userIcon)
-                .addGap(18, 18, 18)
+                .addComponent(userIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUserName)
                 .addGap(18, 18, 18)
                 .addComponent(btnMangePeople)
@@ -160,13 +172,14 @@ public class TestingPeopleAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnSettings)
                 .addGap(26, 26, 26)
                 .addComponent(btnLogout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(lblVersion)
                 .addContainerGap())
         );
 
         jSplitPane1.setLeftComponent(leftBar);
 
+        rightContainer.setBackground(new java.awt.Color(255, 255, 255));
         rightContainer.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(rightContainer);
 
@@ -190,8 +203,18 @@ public class TestingPeopleAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessagesActionPerformed
-        // TODO add your handling code here:
+        MessageJPanel mjp = new MessageJPanel(rightContainer, platform, loginAccount);
+        CardLayout layout = (CardLayout)rightContainer.getLayout();
+        rightContainer.add("MessageJPanel",mjp);
+        layout.next(rightContainer);
     }//GEN-LAST:event_btnMessagesActionPerformed
+
+    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
+        SettingsJPanel sjp = new SettingsJPanel(this, rightContainer,platform, loginAccount);
+        CardLayout layout = (CardLayout)rightContainer.getLayout();
+        rightContainer.add("SettingsJPanel",sjp);
+        layout.next(rightContainer);
+    }//GEN-LAST:event_btnSettingsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

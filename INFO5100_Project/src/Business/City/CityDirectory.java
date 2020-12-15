@@ -27,7 +27,7 @@ public class CityDirectory {
         this.cityList = cityList;
     }
     
-    public City createCity(String name){
+    public City createAndAddCity(String name){
         City city = new City(name);
         city.setName(name);
         cityList.add(city);

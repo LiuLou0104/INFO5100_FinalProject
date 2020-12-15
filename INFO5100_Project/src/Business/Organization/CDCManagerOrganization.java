@@ -12,15 +12,17 @@ import java.util.ArrayList;
  *
  * @author Administrator
  */
-class ManageTestingSiteOrganization extends Organization {
+class CDCManagerOrganization extends Organization {
 
-    public ManageTestingSiteOrganization(String name) {
+    public CDCManagerOrganization(String name) {
         super(name);
     }
 
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Role.RoleType> getSupportedRoleList() {
+        ArrayList<Role.RoleType> list = new ArrayList<>();
+        list.add(Role.RoleType.CDCAdmin);
+        return list;
     }
     
 }
