@@ -8,10 +8,22 @@ package userinterface;
 import Business.City.City;
 import Business.Employee.Employee;
 import Business.Employee.Employee.SexType;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
 import Business.Platform;
+import Business.Role.CDCAdminRole;
+import Business.Role.CDCDataHandlerRole;
+import Business.Role.CDCInfoDistributorRole;
+import Business.Role.NucleicAcidTesterRole;
 import Business.Role.RegisteredTestingPeopleRole;
 import Business.Role.Role;
+import Business.Role.SampleCollectionPeopleRole;
+import Business.Role.SimulationOperatorRole;
+import Business.Role.TestingPeopleAdminRole;
+import Business.Role.TestingSiteAdminRole;
+import Business.Role.TestingSiteDataHandlerRole;
 import Business.UserAccount.UserAccount;
+import Business.Util.EmailToolKit;
 import Business.Util.InputValidator;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -52,8 +64,17 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private void populateRoleCbx() {
         DefaultComboBoxModel<Object> dcbm = new DefaultComboBoxModel<>();
         dcbm.addElement(new RegisteredTestingPeopleRole());
+        dcbm.addElement(new TestingPeopleAdminRole());
+        dcbm.addElement(new SampleCollectionPeopleRole());
+        dcbm.addElement(new NucleicAcidTesterRole());
+        dcbm.addElement(new TestingSiteDataHandlerRole());
+        dcbm.addElement(new TestingSiteAdminRole());
+        dcbm.addElement(new CDCAdminRole());
+        dcbm.addElement(new CDCDataHandlerRole());
+        dcbm.addElement(new CDCInfoDistributorRole());
+        dcbm.addElement(new SimulationOperatorRole());
         cbxRegisteredRole.setModel(dcbm);
-        cbxRegisteredRole.setEnabled(false);
+//        cbxRegisteredRole.setEnabled(false);
     }
     
     private void populateCityCbx() {
@@ -185,6 +206,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         txtAge = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         btnBack.setFont(new java.awt.Font("微软雅黑", 1, 14)); // NOI18N
         btnBack.setText("<< Back to Login");
@@ -395,6 +418,37 @@ public class RegisterJPanel extends javax.swing.JPanel {
             return;
         }
         
+        if (!InputValidator.userNameValidate(username)) {
+            JOptionPane.showMessageDialog(null, "Invalid input!\nUsername consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.\n" +
+                "Username allowed of the dot (.), underscore (_), and hyphen (-).\n" +
+                "The dot (.), underscore (_), or hyphen (-) must not be the first or last character.\n" +
+                "The dot (.), underscore (_), or hyphen (-) does not appear consecutively, e.g., java..regex\n" +
+                "The number of characters must be between 5 to 20.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!InputValidator.userNameValidate(name)) {
+            JOptionPane.showMessageDialog(null, "Invalid input!\nName consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.\n" +
+                "Username allowed of the dot (.), underscore (_), and hyphen (-).\n" +
+                "The dot (.), underscore (_), or hyphen (-) must not be the first or last character.\n" +
+                "The dot (.), underscore (_), or hyphen (-) does not appear consecutively, e.g., java..regex\n" +
+                "The number of characters must be between 5 to 20.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!InputValidator.passwordValidate(password)) {
+            JOptionPane.showMessageDialog(null, "Invalid input!\nPassword consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.\n"
+                    + "At least one character of [$*#&@.].\n"
+                    + "At least six characters long.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!InputValidator.ageValidate(age)) {
+            JOptionPane.showMessageDialog(null, "Invalid input!\nOnly age between 1-120 was allowed.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!InputValidator.emailValidate(email)) {
+            JOptionPane.showMessageDialog(null, "Invalid input!\nWrong email format.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (!platform.checkIfUserAccountIsUnique(username)) {
             JOptionPane.showMessageDialog(null, "Duplicate username, please enter another one!!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -404,18 +458,41 @@ public class RegisterJPanel extends javax.swing.JPanel {
         platform.getEmployeeDirectory().createAndAddEmployee(name, age, sexType, email, city);
         UserAccount ua = platform.getUserAccountDirectory().createAndAddUserAccount(username, password, e, role);
         
+        // get enterprise and organization that the newly registered user belongs to
+        Enterprise enterprise = platform.getEnterpriseDirectory().getEnterpriseByRole(role);
+        Organization organization = enterprise.getOrganizationDirectory().getOrganizationByRole(role);
+        
+        // add employee and useraccount to the specific enterprise and organization
+        enterprise.getEmployeeDirectory().addEmployee(e);
+        enterprise.getUserAccountDirectory().addUserAccount(ua);
+        organization.getEmployeeDirectory().addEmployee(e);
+        organization.getUserAccountDirectory().addUserAccount(ua);
+        
         JOptionPane.showMessageDialog(null, "Register successfully!!!");
+        txtUserName.setEnabled(false);
+        txtPassword.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtName.setEnabled(false);
+        txtAge.setEnabled(false);
+        rbtnFemale.setEnabled(false);
+        rbtnMale.setEnabled(false);
+        cbxRegisteredRole.setEnabled(false);
+        cbxCity.setEnabled(false);
+        
         mainJFrameContainer.remove(this);
         CardLayout layout = (CardLayout) mainJFrameContainer.getLayout();
         layout.previous(mainJFrameContainer);
-//        txtUserName.setText("");
-//        txtPassword.setText("");
-//        txtEmail.setText("");
-//        txtName.setText("");
-//        txtAge.setText("");
-//        rbtnFemale.setSelected(false);
-//        rbtnMale.setSelected(false);
-//        cbxCity.setSelectedIndex(-1);
+        
+        EmailToolKit.sendEmailWhenSuccessfullyRegistered(e.getEmail(), ua);
+        
+        //        for (Enterprise en : platform.getEnterpriseDirectory().getEnterpriseList()) {
+//            System.out.println(en.getName());
+//            for (Organization or : en.getOrganizationDirectory().getOrganizationList()) {
+//                System.out.println(or.getName());
+//                or.getUserAccountDirectory().getUserAccountList().forEach((useraccount)->System.out.println(useraccount.getUsername()));
+//            }
+//            en.getUserAccountDirectory().getUserAccountList().forEach((useraccount)->System.out.println(useraccount.getUsername()));
+//        }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void rbtnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFemaleActionPerformed

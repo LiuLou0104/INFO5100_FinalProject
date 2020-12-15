@@ -65,11 +65,11 @@ public class DB4OUtil {
         ObjectContainer conn = createConnection();
         ObjectSet<Platform> platforms = conn.query(Platform.class);
         
-        // delete existing EcoSystem
-//        for (EcoSystem s : systems) {
-//            conn.delete(s);
+//         delete existing Platform
+//        for (Platform p : platforms) {
+//            conn.delete(p);
 //        }
-//        EcoSystem system = ConfigureAPlatform.configure();
+//        Platform platform = ConfigureAPlatform.configure();
         
         Platform platform;
         if (platforms.size() == 0){

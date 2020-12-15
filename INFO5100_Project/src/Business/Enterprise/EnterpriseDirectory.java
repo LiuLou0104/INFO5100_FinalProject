@@ -6,6 +6,8 @@ package Business.Enterprise;
  */
 
 import Business.Enterprise.Enterprise.EnterpriseType;
+import Business.Role.Role;
+import Business.Role.Role.RoleType;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,27 @@ import java.util.ArrayList;
 public class EnterpriseDirectory {
     
     private ArrayList<Enterprise> enterpriseList;
+    
+    public Enterprise getEnterprise(EnterpriseType type) {
+        for (Enterprise enterprise : enterpriseList) {
+            if (type.getValue().equals(enterprise.getName())) {
+                return enterprise;
+            }
+        }
+        return null;
+    }
+    
+    public Enterprise getEnterpriseByRole(Role role) {
+        for (Enterprise enterprise : enterpriseList) {
+            ArrayList<RoleType> roleList = enterprise.getSupportedRoleList();
+            for (RoleType type : roleList) {
+                if (type.getValue().equals(role.getName())) {
+                    return enterprise;
+                }
+            }
+        }
+        return null;
+    }
 
     public EnterpriseDirectory() {
         enterpriseList = new ArrayList();
@@ -24,7 +47,7 @@ public class EnterpriseDirectory {
         return enterpriseList;
     }
     
-    public Enterprise createEnterprise(EnterpriseType type){
+    public Enterprise createAndAddEnterprise(EnterpriseType type){
         Enterprise enterprise = null;
         if (type.getValue().equals(EnterpriseType.TestingPeople.getValue())){
             enterprise = new TestingPeopleEnterprise(EnterpriseType.TestingPeople.getValue());

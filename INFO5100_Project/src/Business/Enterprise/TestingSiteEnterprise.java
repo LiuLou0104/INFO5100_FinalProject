@@ -5,7 +5,7 @@
  */
 package Business.Enterprise;
 
-import Business.Role.Role;
+import Business.Role.Role.RoleType;
 import java.util.ArrayList;
 
 /**
@@ -19,8 +19,13 @@ class TestingSiteEnterprise extends Enterprise {
     }
 
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<RoleType> getSupportedRoleList() {
+        ArrayList<RoleType> list = new ArrayList<>();
+        list.add(RoleType.SampleCollectionPeople);
+        list.add(RoleType.NucleicAcidTester);
+        list.add(RoleType.TestingSiteDataHandler);
+        list.add(RoleType.TestingSiteAdmin);
+        return list;
     }
     
 }

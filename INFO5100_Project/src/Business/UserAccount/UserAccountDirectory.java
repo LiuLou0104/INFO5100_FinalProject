@@ -7,6 +7,7 @@ package Business.UserAccount;
 import Business.Employee.Employee;
 import Business.Role.Role;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,9 +20,23 @@ public class UserAccountDirectory {
     public UserAccountDirectory() {
         userAccountList = new ArrayList();
     }
+    
+    public List<UserAccount> getActiveUserAccounts() {
+        List<UserAccount> list = new ArrayList<>();
+        for (UserAccount ua : userAccountList) {
+            if(!ua.isDeleted()) {
+                list.add(ua);
+            }
+        }
+        return list;
+    }
 
     public ArrayList<UserAccount> getUserAccountList() {
         return userAccountList;
+    }
+    
+    public void addUserAccount(UserAccount ua) {
+        userAccountList.add(ua);
     }
     
     public UserAccount authenticateUser(String username, String password){
