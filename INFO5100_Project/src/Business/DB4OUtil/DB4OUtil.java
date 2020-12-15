@@ -66,20 +66,20 @@ public class DB4OUtil {
         ObjectSet<Platform> platforms = conn.query(Platform.class);
         
 //         delete existing Platform
-//        for (Platform p : platforms) {
-//            conn.delete(p);
-//        }
-//        Platform platform = ConfigureAPlatform.configure();
+        for (Platform p : platforms) {
+            conn.delete(p);
+        }
+        Platform platform = ConfigureAPlatform.configure();
         
-        Platform platform;
-        if (platforms.size() == 0){
-            System.out.println("No Platform stored before, configuring a new one...");
-            platform = ConfigureAPlatform.configure();  // If there's no System in the record, create a new one
-        }
-        else{
-            System.out.println("Loading existing EcoSystem...");
-            platform = platforms.get(platforms.size() - 1);
-        }
+//        Platform platform;
+//        if (platforms.size() == 0){
+//            System.out.println("No Platform stored before, configuring a new one...");
+//            platform = ConfigureAPlatform.configure();  // If there's no System in the record, create a new one
+//        }
+//        else{
+//            System.out.println("Loading existing EcoSystem...");
+//            platform = platforms.get(platforms.size() - 1);
+//        }
 
         conn.close();
         return platform;

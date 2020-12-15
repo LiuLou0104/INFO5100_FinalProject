@@ -8,6 +8,7 @@ package userinterface.CDC;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Platform;
 import Business.UserAccount.UserAccount;
+import Business.Util.StretchIcon;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -35,7 +36,7 @@ public class CDCInfoDistributorWorkAreaJPanel extends javax.swing.JPanel {
     
     public void initLeftUserBar() {
         String imagePath = loginAccount.getIconPath();
-        ImageIcon imageIcon = new ImageIcon(imagePath);
+        ImageIcon imageIcon = new StretchIcon(imagePath);
         userIcon.setIcon(imageIcon);
         lblUserName.setText(loginAccount.getUsername());
         lblVersion.setText(platform.getVersion());
